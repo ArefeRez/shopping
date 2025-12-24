@@ -1,5 +1,5 @@
 import React from 'react';
-interface IProductItemProps{
+export interface IProductItemProps{
     
         id: number,
         image: string,
