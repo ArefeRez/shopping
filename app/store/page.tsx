@@ -1,5 +1,6 @@
 import Container from '@/component/Container';
 import ProductItem from '@/component/ProductItem';
+import Link from 'next/link';
 import React from 'react';
 const data = [
     {
@@ -36,7 +37,10 @@ const store = () => {
             <h1 className='font-bold py-5'>store</h1>
             <div className='grid grid-cols-4 gap-2'>
                 {data.map (item => (
-                    <ProductItem key={item.id} {...item} />
+                    <Link key={item.id} href={`/store/${item.id}`}>
+                    <ProductItem  {...item} />
+                    </Link>
+                    
                 ))}
                 
             </div>
