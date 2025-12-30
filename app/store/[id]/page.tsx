@@ -23,7 +23,7 @@ async function product ({params} : IProductProps) {
                     <h2 className='font-bold'>{data.title}</h2>
                     <p className='text-gray-700'>{data.description}</p>
                     <p className='font-medium'>price : <span>{data.price}</span></p>
-                    <AddToCart/>
+                    <AddToCart id={String(data.id)}/>
                 </div>
             </div>
         </Container>

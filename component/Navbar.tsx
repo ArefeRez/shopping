@@ -1,11 +1,11 @@
 "use client"
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import React from 'react';
-import Container from './Container';
 import { FaShoppingCart } from 'react-icons/fa';
+import { useCartShoppingContext } from '@/context/CartShoppingContext';
 
 const Navbar = () => {
+    const {cartTotalQty} = useCartShoppingContext();
 const pathname = usePathname();
 
     const NavLinks = [
@@ -26,8 +26,9 @@ const pathname = usePathname();
             ))}
             </div>
             
-            <div className='text-2xl'>
-               <Link href={"/cartShopping"}><FaShoppingCart /> </Link>
+            <div className='flex '>
+               <Link className='text-2xl relative mr-3' href={"/cartShopping"}><FaShoppingCart /> </Link>
+               <span className='absolute top-1 right-5 bg-red-500 text-amber-50 rounded-full px-2'>{cartTotalQty}</span>
             </div>
             
         </div>
