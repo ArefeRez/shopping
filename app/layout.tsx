@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Layout from "@/component/Layout";
+import { CartShoppingProvider } from "@/context/CartShoppingContext";
 
 export const metadata: Metadata = {
   title: "OAK store",
@@ -16,7 +17,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Layout>{children}</Layout>
+        <CartShoppingProvider>
+          <Layout>{children}</Layout>
+        </CartShoppingProvider>
+        
              
      
       </body>

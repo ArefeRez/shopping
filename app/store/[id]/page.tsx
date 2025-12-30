@@ -1,3 +1,4 @@
+import AddToCart from '@/component/AddToCart';
 import Container from '@/component/Container';
 import { IProductItemProps } from '@/component/ProductItem';
 import { promises } from 'dns';
@@ -22,11 +23,7 @@ async function product ({params} : IProductProps) {
                     <h2 className='font-bold'>{data.title}</h2>
                     <p className='text-gray-700'>{data.description}</p>
                     <p className='font-medium'>price : <span>{data.price}</span></p>
-                    <div className='flex gap-2 mt-5'>
-                        <button className='px-3 py-1 bg-blue-400 rounded-[8px]'>+</button>
-                        <p>2</p>
-                        <button className='px-3 py-1 bg-blue-400 rounded-[8px]'>-</button>
-                    </div>
+                    <AddToCart/>
                 </div>
             </div>
         </Container>
