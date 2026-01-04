@@ -8,11 +8,12 @@ type CartShoppingProviderProps = {
 type CartItem = {
     id: number;
     qty: number;
+    price: number;
 };
 
 type TCartShoppingContext = {
     cartItems: CartItem[];
-    handleIncreaseProductQty: (id: number) => void;
+    handleIncreaseProductQty: (id: number, price: number) => void;
     getProductQty: (id: number) => number;
     cartTotalQty: number;
     handleDecreaseProductQty: (id: number) => void;
@@ -43,12 +44,12 @@ export function CartShoppingProvider({ children }: CartShoppingProviderProps) {
 //1.es gibt
 //2. es gibt und wir wollen mehr machen
 //3.es gibt nicht
-const handleIncreaseProductQty = (id : number) => {
+const handleIncreaseProductQty = (id : number, price: number) => {
     setCartItems((currentItem) => {
         let isNotProductExist = currentItem.find((item) => item.id == id) == null;
 
         if(isNotProductExist){
-            return [...currentItem,{id : id, qty: 1}];
+            return [...currentItem,{id : id, qty: 1, price: price}];
         } else {
             return currentItem.map((item) => {
                 if(item.id == id) {

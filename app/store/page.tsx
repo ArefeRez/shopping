@@ -5,7 +5,7 @@ import React from 'react';
 import axios from 'axios';
  
 async function store () {
-    const result = await axios("http://localhost:3005/products");
+    const result = await axios("http://localhost:3006/products");
     const data = result.data as IProductItemProps[];
     console.log(data.map(item => item.id));
 

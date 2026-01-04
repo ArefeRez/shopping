@@ -11,7 +11,7 @@ const CartShoppingItem = ({id, qty}:ICartItemProps) => {
     const [data, setData] = useState({} as IProductItemProps);
 
     useEffect(() => {
-        axios(`http://localhost:3003/products/${id}`).then(result => { const {data} = result;
+        axios(`http://localhost:3006/products/${id}`).then(result => { const {data} = result;
         setData(data)})
         
     }, []);

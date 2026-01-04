@@ -12,7 +12,7 @@ interface IProductProps{
 }
 async function product ({params} : IProductProps) {
    const {id}= await params;
-    const result= await axios(`http://localhost:3005/products/${id}`);
+    const result= await axios(`http://localhost:3006/products/${id}`);
     const data= result.data as IProductItemProps;
     return (
         <Container>

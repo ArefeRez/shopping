@@ -2,22 +2,11 @@
 
 import CartShoppingItem from '@/component/CartShoppingItem';
 import Container from '@/component/Container';
-import { IProductItemProps } from '@/component/ProductItem';
 import { useCartShoppingContext } from "@/context/CartShoppingContext";
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 const CartShopping = () => {
   const { cartItems } = useCartShoppingContext();
-  const [data, setData] = useState<IProductItemProps[]>([]);
-
-  useEffect(() => {
-    axios(`http://localhost:3005/products`).then(result => {
-      const { data } = result;
-      setData(data)
-    })
-
-  }, []);
   return (
     <Container>
       <h1 className="font-bold my-5">Shopping cart</h1>
@@ -27,14 +16,11 @@ const CartShopping = () => {
       ))}
 
       <div className="shadow border rounded-[8px] p-[16px]">
-        <h3>total price <span>
+        <h3>total price: $
           {
-            cartItems.reduce((total, items) => {
-              let selectedProduct = data.find((product) => product.id === items.id)
-              return total + (selectedProduct ? selectedProduct.price * items.qty : 0)
-            }, 0)
+            cartItems.reduce((total, item) => total + item.price * item.qty, 0)
           }
-        </span></h3>
+        </h3>
         <p>discount</p>
         <p>final price</p>
         <input
