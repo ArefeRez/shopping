@@ -15,6 +15,8 @@ type TCartShoppingContext = {
     handleIncreaseProductQty: (id: number) => void;
     getProductQty: (id: number) => number;
     cartTotalQty: number;
+    handelDecreaseProductQty: (id: number) => void;
+    handleRemoveProduc: (id: number) => void;
 };
 
 const CartShoppingContext = createContext({} as TCartShoppingContext);
@@ -61,9 +63,37 @@ const handleIncreaseProductQty = (id : number) => {
             })
         }
     }
-)}    
+)} 
+//1.es gibt nur eins
+//2.es gibt mher und man will wenig machen
+//3.das ist nicht unsere mittel
+const handelDecreaseProductQty = (id : number) => {
+    setCartItems(currentItem =>{
+        let isLastOne = currentItem.find(item => item.id == id)?.qty == 1 
+        if(isLastOne){
+            return currentItem.filter(item => item.id !=id)
+        }else{
+            return currentItem.map(item=>{
+                if(item.id == id) {
+                    return {
+                        ...item,
+                        qty : item.qty - 1,
+                    };
+                    
+                }else{
+                      return item;  
+                    }
+            })
+        }
+    })
+}  
+const handleRemoveProduct = (id : Number) => {
+    setCartItems((currentItem) => {
+        return currentItem.filter(item => item.id !=id)
+    })
+}
     return (
-        <CartShoppingContext.Provider value={{ cartItems, handleIncreaseProductQty ,getProductQty , cartTotalQty }}>
+        <CartShoppingContext.Provider value={{ cartItems, handleIncreaseProductQty ,getProductQty , cartTotalQty , handelDecreaseProductQty , handleRemoveProduct}}>
             {children}
         </CartShoppingContext.Provider>
     );
