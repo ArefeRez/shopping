@@ -1,19 +1,30 @@
-import React from 'react';
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { IProductItemProps } from "./ProductItem";
+import AddToCart from "./AddToCart";
 
-const CartShoppingItem = () => {
+interface ICartItemProps{
+    id: number,
+    qty: number,
+}
+const CartShoppingItem = ({id, qty}:ICartItemProps) => {
+    const [data, setData] = useState({} as IProductItemProps);
+
+    useEffect(() => {
+        axios(`http://localhost:3003/products/${id}`).then(result => { const {data} = result;
+        setData(data)})
+        
+    }, []);
+
     return (
       
             <div className='bg-gray-300 grid grid-cols-12 rounded-[8px] mb-5 '>
-            <img className='col-span-3' src="" alt="" />
+            <img className='col-span-3' src={data.image} alt="" />
             <div className='col-span-9 p-[32px]'>
-                <h2 className='font-bold'>Name Product</h2>
-                <p>Number</p>
-                <p>Price</p>
-                <div className='flex gap-2 mt-5'>
-                        <button className='px-3 py-1 bg-blue-400 rounded-[8px]'>+</button>
-                        <p>2</p>
-                        <button className='px-3 py-1 bg-blue-400 rounded-[8px]'>-</button>
-                    </div>
+                <h2 className='font-bold'>Name Product:  <span>{data.title}</span></h2>
+                <p>Number: {qty}</p>
+                <p>Price: $<span>{data.price}</span> </p>
+                <AddToCart id={id.toString()} />
             </div>
           </div>
         

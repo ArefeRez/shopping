@@ -2,10 +2,11 @@ import Container from '@/component/Container';
 import ProductItem, { IProductItemProps } from '@/component/ProductItem';
 import Link from 'next/link';
 import React from 'react';
+import axios from 'axios';
  
 async function store () {
-    const result = await fetch("http://localhost:3003/products");
-    const data = await  result.json() as IProductItemProps[];
+    const result = await axios("http://localhost:3005/products");
+    const data = result.data as IProductItemProps[];
     console.log(data.map(item => item.id));
 
     return (

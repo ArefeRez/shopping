@@ -15,8 +15,8 @@ type TCartShoppingContext = {
     handleIncreaseProductQty: (id: number) => void;
     getProductQty: (id: number) => number;
     cartTotalQty: number;
-    handelDecreaseProductQty: (id: number) => void;
-    handleRemoveProduc: (id: number) => void;
+    handleDecreaseProductQty: (id: number) => void;
+    handleRemoveProduct: (id: number) => void;
 };
 
 const CartShoppingContext = createContext({} as TCartShoppingContext);
@@ -67,11 +67,11 @@ const handleIncreaseProductQty = (id : number) => {
 //1.es gibt nur eins
 //2.es gibt mher und man will wenig machen
 //3.das ist nicht unsere mittel
-const handelDecreaseProductQty = (id : number) => {
+const handleDecreaseProductQty = (id: number) => {
     setCartItems(currentItem =>{
         let isLastOne = currentItem.find(item => item.id == id)?.qty == 1 
         if(isLastOne){
-            return currentItem.filter(item => item.id !=id)
+            return currentItem.filter(item => item.id != id)
         }else{
             return currentItem.map(item=>{
                 if(item.id == id) {
@@ -79,21 +79,20 @@ const handelDecreaseProductQty = (id : number) => {
                         ...item,
                         qty : item.qty - 1,
                     };
-                    
                 }else{
                       return item;  
-                    }
+                }
             })
         }
     })
 }  
-const handleRemoveProduct = (id : Number) => {
+const handleRemoveProduct = (id: number) => {
     setCartItems((currentItem) => {
-        return currentItem.filter(item => item.id !=id)
+        return currentItem.filter(item => item.id !== id)
     })
 }
     return (
-        <CartShoppingContext.Provider value={{ cartItems, handleIncreaseProductQty ,getProductQty , cartTotalQty , handelDecreaseProductQty , handleRemoveProduct}}>
+        <CartShoppingContext.Provider value={{ cartItems, handleIncreaseProductQty ,getProductQty , cartTotalQty , handleDecreaseProductQty , handleRemoveProduct}}>
             {children}
         </CartShoppingContext.Provider>
     );

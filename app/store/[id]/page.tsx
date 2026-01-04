@@ -1,6 +1,7 @@
 import AddToCart from '@/component/AddToCart';
 import Container from '@/component/Container';
 import { IProductItemProps } from '@/component/ProductItem';
+import axios from 'axios';
 import { promises } from 'dns';
 import { SearchParams } from 'next/dist/server/request/search-params';
 import React from 'react';
@@ -11,8 +12,8 @@ interface IProductProps{
 }
 async function product ({params} : IProductProps) {
    const {id}= await params;
-    const result= await fetch(`http://localhost:3003/products/${id}`);
-    const data= await result.json() as IProductItemProps;
+    const result= await axios(`http://localhost:3005/products/${id}`);
+    const data= result.data as IProductItemProps;
     return (
         <Container>
             <div className='grid grid-cols-12 p-4 mt-8 shadow'>
